@@ -13,13 +13,7 @@ namespace System
         {
             if (s == null || s.Count() < 1)
                 return string.Empty;
-            System.Text.StringBuilder Stsb = new System.Text.StringBuilder();
-            foreach (T a in s)
-            {
-                Stsb.Append(a);
-                Stsb.Append(split);
-            }
-            return Stsb.ToString().Substring(0, Stsb.Length - split.Length);
+            return string.Join(split, s);
         }
         public static string ToStringDot<T>(this IEnumerable<T> s)
         {

@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <Authors>张磊</Authors>
     <Company>张磊 xLiAd</Company>
     <Copyright>Copyright © zhanglei 2018</Copyright>
     <PackageProjectUrl>https://github.com/zl33842901/ExtMethods</PackageProjectUrl>
     <Description>几个常用的扩展方法</Description>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
 </Project>
