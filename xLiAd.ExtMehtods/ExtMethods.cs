@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.ComponentModel;
 
 namespace System
 {
@@ -123,6 +125,77 @@ namespace System
             else
                 return s.ToString();
         }
+        /// <summary>
+        /// 把日期字符串 转成指定格式
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="format"></param>
+        /// <returns></returns>
+        public static string FormatDate(this string s, string format = "yyyy-MM-dd")
+        {
+            DateTime d;
+            bool b = DateTime.TryParse(s, out d);
+            if (b)
+            {
+                return d.ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                return s;
+            }
+        }
+    }
+
+    public static class EnumExtension
+    {
+        /// <summary>
+        /// 把枚举缓存起来，提高系统性能
+        /// </summary>
+        private static Dictionary<string, object> _EnumItemCollectionsStock;
+        static EnumExtension()
+        {
+            _EnumItemCollectionsStock = new Dictionary<string, object>();
+        }
+        public static string GetDescription<TEnum>(this TEnum value)
+        {
+            FieldInfo fileInfo = value.GetType().GetField(value.ToString());
+
+            if (fileInfo != null)
+            {
+                var attributes = (DescriptionAttribute[])fileInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+                if (attributes.Length > 0)
+                {
+                    return attributes[0].Description;
+                }
+            }
+
+            return value.ToString();
+        }
+        public static IEnumerable<EnumListItem> GetEnumItemCollection<TEnum>(bool addDefault = true, string addDefaultText = "全部") where TEnum : struct
+        {
+            string enumKey = typeof(TEnum).FullName + "_" + addDefault;
+            if (!_EnumItemCollectionsStock.ContainsKey(enumKey) || _EnumItemCollectionsStock[enumKey] == null)
+            {
+                lock (_EnumItemCollectionsStock)
+                {
+                    IEnumerable<EnumListItem> defaultItem = new List<EnumListItem>();
+                    if (addDefault)
+                    {
+                        defaultItem = new List<EnumListItem>() { new EnumListItem() { ItemText = addDefaultText } };
+                    }
+                    IEnumerable<EnumListItem> collection = defaultItem.Concat(Enum.GetValues(typeof(TEnum)).Cast<TEnum>().Select<TEnum, EnumListItem>(e => new EnumListItem { ItemValue = Convert.ToInt32(Enum.Parse(typeof(TEnum), e.ToString())), ItemText = e.GetDescription() }));
+
+                    _EnumItemCollectionsStock[enumKey] = collection;
+                }
+            }
+            return _EnumItemCollectionsStock[enumKey] as IEnumerable<EnumListItem>;
+        }
+    }
+    public class EnumListItem
+    {
+        public int ItemValue { get; set; }
+        public string ItemText { get; set; }
     }
 }
 
