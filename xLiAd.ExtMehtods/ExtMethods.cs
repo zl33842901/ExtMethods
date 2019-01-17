@@ -6,6 +6,7 @@ using System.Net;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.ComponentModel;
+using System.Collections.Specialized;
 
 namespace System
 {
@@ -144,6 +145,18 @@ namespace System
                 return s;
             }
         }
+
+        public static NameValueCollection ToNameValue<T>(this T obj) where T : class
+        {
+            var ps = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetField | BindingFlags.SetField);
+            ps = ps.Where(x => x.CanRead && x.GetMethod.IsPublic && x.CanWrite && x.SetMethod.IsPublic).ToArray();
+            NameValueCollection rst = new NameValueCollection();
+            foreach(var p in ps)
+            {
+                rst.Add(p.Name, p.GetValue(obj)?.ToString());
+            }
+            return rst;
+        }
     }
 
     public static class EnumExtension
@@ -156,7 +169,7 @@ namespace System
         {
             _EnumItemCollectionsStock = new Dictionary<string, object>();
         }
-        public static string GetDescription<TEnum>(this TEnum value)
+        public static string GetDescription<TEnum>(this TEnum value) where TEnum : Enum
         {
             FieldInfo fileInfo = value.GetType().GetField(value.ToString());
 
@@ -172,7 +185,7 @@ namespace System
 
             return value.ToString();
         }
-        public static IEnumerable<EnumListItem> GetEnumItemCollection<TEnum>(bool addDefault = true, string addDefaultText = "全部") where TEnum : struct
+        public static IEnumerable<EnumListItem> GetEnumItemCollection<TEnum>(bool addDefault = true, string addDefaultText = "全部") where TEnum : Enum
         {
             string enumKey = typeof(TEnum).FullName + "_" + addDefault;
             if (!_EnumItemCollectionsStock.ContainsKey(enumKey) || _EnumItemCollectionsStock[enumKey] == null)
