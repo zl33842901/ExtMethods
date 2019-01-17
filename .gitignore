@@ -12,3 +12,5 @@
 /xLiAd.ExtMehtods/xLiAd.ExtMethods.nuspec.bak
 /xLiAd.ExtMethods.Standard/obj
 /xLiAd.ExtMethods.Standard/bin/Release/netstandard2.0
+/xLiAd.ExtMethods.Standard/bin/Debug/netstandard2.0
+/xLiAd.ExtMethods.Standard/nupkgs

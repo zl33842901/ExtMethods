@@ -7,6 +7,7 @@
     <Description>几个常用的扩展方法  只对 .netstandard</Description>
     <Copyright>Copyright © zhanglei 2019</Copyright>
     <PackageProjectUrl>https://github.com/zl33842901/ExtMethods</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

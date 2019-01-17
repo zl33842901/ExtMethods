@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
-namespace xLiAd.ExtMethods.Standard
+namespace System
 {
     public static class ExtMethods
     {
