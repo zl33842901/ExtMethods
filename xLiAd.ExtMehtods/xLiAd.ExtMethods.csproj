@@ -7,18 +7,37 @@
     <Copyright>Copyright © zhanglei 2019</Copyright>
     <PackageProjectUrl>https://github.com/zl33842901/ExtMethods</PackageProjectUrl>
     <Description>几个常用的扩展方法</Description>
-    <Version>1.1.5</Version>
+    <Version>1.1.7</Version>
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-    <DocumentationFile>D:\MyGithub\ExtMethods\xLiAd.ExtMehtods\xLiAd.ExtMethods.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.0\xLiAd.ExtMethods.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net45|AnyCPU'">
+    <DocumentationFile>bin\Debug\net45\xLiAd.ExtMethods.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\xLiAd.ExtMethods.xml</DocumentationFile>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
+    <DocumentationFile>bin\Release\net45\xLiAd.ExtMethods.xml</DocumentationFile>
+    <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="nupkgs\**" />
     <EmbeddedResource Remove="nupkgs\**" />
     <None Remove="nupkgs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="xLiAd.ExtMethods.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
