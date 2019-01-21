@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>xLiAd.ExtMethods.Standard</name>
+    </assembly>
+    <members>
+        <member name="T:System.ExtMethods">
+            <summary>
+            扩展方法
+            </summary>
+        </member>
+        <member name="M:System.ExtMethods.ToNameValue(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,Microsoft.Extensions.Primitives.StringValues}})">
+            <summary>
+            把特定类型实例转换为字符串键值对
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -10,18 +10,42 @@ using System.Collections.Specialized;
 
 namespace System
 {
+    /// <summary>
+    /// 扩展方法
+    /// </summary>
     public static class ExtMethods
     {
+        /// <summary>
+        /// 拼成逗号分隔的字符串
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="s">源列表</param>
+        /// <param name="split">分隔符，默认为英文逗号</param>
+        /// <returns></returns>
         public static string ToStringBy<T>(this IEnumerable<T> s, string split = ",")
         {
             if (s == null || s.Count() < 1)
                 return string.Empty;
             return string.Join(split, s);
         }
+        /// <summary>
+        /// ToStringBy 方法的友好名重载
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static string ToStringDot<T>(this IEnumerable<T> s)
         {
             return s.ToStringBy();
         }
+        /// <summary>
+        /// 获取某个实体的某个字段（为了防止直接 .引用报错）
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TKey"></typeparam>
+        /// <param name="t">实体</param>
+        /// <param name="keySelector">投影选择器</param>
+        /// <returns></returns>
         public static TKey Field<T, TKey>(this T t, Expression<Func<T, TKey>> keySelector) where T : class
         {
             if (t == null)
@@ -29,6 +53,11 @@ namespace System
             else
                 return keySelector.Compile().Invoke(t);
         }
+        /// <summary>
+        /// 转换成字符串（防止 .ToString 报错）
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static string ToStringForce(this object s)
         {
             if (s == null)
@@ -36,6 +65,12 @@ namespace System
             else
                 return s.ToString();
         }
+        /// <summary>
+        /// 字符串转数字（防止 Convert.ToInt32 报错）
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="defValue">转换失败时的默认值</param>
+        /// <returns></returns>
         public static int ToInt(this string s, int defValue)
         {
             if (string.IsNullOrWhiteSpace(s))
@@ -46,10 +81,38 @@ namespace System
             else
                 return defValue;
         }
+        /// <summary>
+        /// 字符串转数字 失败时返回0
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static int ToInt(this string s)
         {
             return s.ToInt(0);
         }
+        /// <summary>
+        /// 限制数字值大小
+        /// </summary>
+        /// <param name="i">原数字</param>
+        /// <param name="min">最小值（可包含）</param>
+        /// <param name="max">最大值（可包含）</param>
+        /// <param name="defaultVal">默认值（超出范围时返回此值）</param>
+        /// <returns></returns>
+        public static int Limit(this int i, int min,int max,int defaultVal)
+        {
+            if (i < min)
+                return defaultVal;
+            else if (i > max)
+                return defaultVal;
+            else
+                return i;
+        }
+        /// <summary>
+        /// 字符串转换为日期
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="defValue">转换失败时的默认值</param>
+        /// <returns></returns>
         public static DateTime ToDateTime(this string s, DateTime defValue)
         {
             DateTime TempDateTime;
@@ -62,6 +125,12 @@ namespace System
                 return defValue;
             }
         }
+        /// <summary>
+        /// 数字转 byte
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="defValue">转换失败时的默认值</param>
+        /// <returns></returns>
         public static byte ToByte(this int s, byte defValue)
         {
             try
@@ -73,18 +142,42 @@ namespace System
                 return defValue;
             }
         }
+        /// <summary>
+        /// 按字节数截取字符串
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="length">字节数</param>
+        /// <param name="isDot">结尾是否加省略号</param>
+        /// <returns></returns>
         public static string Cut(this string s, int length, bool isDot = false)
         {
             return Common.StringHelper.CutString(s, length, isDot);
         }
+        /// <summary>
+        /// string.IsNullOrEmpty 的友好形式
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static bool NullOrEmpty(this string s)
         {
             return string.IsNullOrEmpty(s);
         }
+        /// <summary>
+        /// string.IsNullOrWhiteSpace 的友好形式
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static bool NullOrWhiteSpace(this string s)
         {
             return string.IsNullOrWhiteSpace(s);
         }
+        /// <summary>
+        /// 数字逗号分隔的字符串，转为数字列表
+        /// </summary>
+        /// <param name="s">1,2,3,4 这样的字符串</param>
+        /// <param name="Allow0">是否允许0</param>
+        /// <param name="Distinct">是否去重</param>
+        /// <returns></returns>
         public static List<int> ToListIntByDot(this string s, bool Allow0 = false, bool Distinct = false)
         {
             List<int> Li = new List<int>();
@@ -108,6 +201,11 @@ namespace System
                 Li = Li.Distinct().ToList();
             return Li;
         }
+        /// <summary>
+        /// 字符串转换为 decimal 失败时返回0
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static decimal ToDecimal(this string s)
         {
             try
@@ -119,6 +217,11 @@ namespace System
                 return 0;
             }
         }
+        /// <summary>
+        /// object 转为字符串 避免 .ToString 报错
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public static string ToStringNoError(this object s)
         {
             if (s == null)
@@ -145,7 +248,12 @@ namespace System
                 return s;
             }
         }
-
+        /// <summary>
+        /// 把类实例的可读写属性转换为字符串键值对
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static NameValueCollection ToNameValue<T>(this T obj) where T : class
         {
             var ps = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetField | BindingFlags.SetField);
@@ -159,6 +267,9 @@ namespace System
         }
     }
 
+    /// <summary>
+    /// 枚举扩展
+    /// </summary>
     public static class EnumExtension
     {
         /// <summary>
@@ -169,6 +280,12 @@ namespace System
         {
             _EnumItemCollectionsStock = new Dictionary<string, object>();
         }
+        /// <summary>
+        /// 获取枚举的 Description 特性值
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string GetDescription<TEnum>(this TEnum value) where TEnum : Enum
         {
             FieldInfo fileInfo = value.GetType().GetField(value.ToString());
@@ -185,6 +302,13 @@ namespace System
 
             return value.ToString();
         }
+        /// <summary>
+        /// 把枚举转换为适合作下拉选项的形式
+        /// </summary>
+        /// <typeparam name="TEnum"></typeparam>
+        /// <param name="addDefault"></param>
+        /// <param name="addDefaultText"></param>
+        /// <returns></returns>
         public static IEnumerable<EnumListItem> GetEnumItemCollection<TEnum>(bool addDefault = true, string addDefaultText = "全部") where TEnum : Enum
         {
             string enumKey = typeof(TEnum).FullName + "_" + addDefault;
@@ -205,17 +329,34 @@ namespace System
             return _EnumItemCollectionsStock[enumKey] as IEnumerable<EnumListItem>;
         }
     }
+    /// <summary>
+    /// 下拉选项格式的类
+    /// </summary>
     public class EnumListItem
     {
+        /// <summary>
+        /// 选项值
+        /// </summary>
         public int ItemValue { get; set; }
+        /// <summary>
+        /// 选项文字
+        /// </summary>
         public string ItemText { get; set; }
     }
 }
 
 namespace Common
 {
+    /// <summary>
+    /// 不太适合在 System 命名空间下的扩展方法
+    /// </summary>
     public static class ExtMethods
     {
+        /// <summary>
+        /// IP（V4）的字符串形式转为数字形式
+        /// </summary>
+        /// <param name="IP"></param>
+        /// <returns></returns>
         public static int ConvertIpToInt(string IP)
         {
             byte[] IPArr = IPAddress.Parse(IP).GetAddressBytes();
@@ -224,7 +365,7 @@ namespace Common
         }
 
         /// <summary>
-        /// 
+        /// 两个时间进行比较 返回友好的中文提示
         /// </summary>
         /// <param name="s"></param>
         /// <param name="dt">要比较的时间 如（DateTime.New）</param>

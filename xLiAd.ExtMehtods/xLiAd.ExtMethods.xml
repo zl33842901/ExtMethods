@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>xLiAd.ExtMethods</name>
+    </assembly>
+    <members>
+        <member name="T:System.ExtMethods">
+            <summary>
+            扩展方法
+            </summary>
+        </member>
+        <member name="M:System.ExtMethods.ToStringBy``1(System.Collections.Generic.IEnumerable{``0},System.String)">
+            <summary>
+            拼成逗号分隔的字符串
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="s">源列表</param>
+            <param name="split">分隔符，默认为英文逗号</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToStringDot``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            ToStringBy 方法的友好名重载
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.Field``2(``0,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            获取某个实体的某个字段（为了防止直接 .引用报错）
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <param name="t">实体</param>
+            <param name="keySelector">投影选择器</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToStringForce(System.Object)">
+            <summary>
+            转换成字符串（防止 .ToString 报错）
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToInt(System.String,System.Int32)">
+            <summary>
+            字符串转数字（防止 Convert.ToInt32 报错）
+            </summary>
+            <param name="s"></param>
+            <param name="defValue">转换失败时的默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToInt(System.String)">
+            <summary>
+            字符串转数字 失败时返回0
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.Limit(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            限制数字值大小
+            </summary>
+            <param name="i">原数字</param>
+            <param name="min">最小值（可包含）</param>
+            <param name="max">最大值（可包含）</param>
+            <param name="defaultVal">默认值（超出范围时返回此值）</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToDateTime(System.String,System.DateTime)">
+            <summary>
+            字符串转换为日期
+            </summary>
+            <param name="s"></param>
+            <param name="defValue">转换失败时的默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToByte(System.Int32,System.Byte)">
+            <summary>
+            数字转 byte
+            </summary>
+            <param name="s"></param>
+            <param name="defValue">转换失败时的默认值</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.Cut(System.String,System.Int32,System.Boolean)">
+            <summary>
+            按字节数截取字符串
+            </summary>
+            <param name="s"></param>
+            <param name="length">字节数</param>
+            <param name="isDot">结尾是否加省略号</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.NullOrEmpty(System.String)">
+            <summary>
+            string.IsNullOrEmpty 的友好形式
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.NullOrWhiteSpace(System.String)">
+            <summary>
+            string.IsNullOrWhiteSpace 的友好形式
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToListIntByDot(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            数字逗号分隔的字符串，转为数字列表
+            </summary>
+            <param name="s">1,2,3,4 这样的字符串</param>
+            <param name="Allow0">是否允许0</param>
+            <param name="Distinct">是否去重</param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToDecimal(System.String)">
+            <summary>
+            字符串转换为 decimal 失败时返回0
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToStringNoError(System.Object)">
+            <summary>
+            object 转为字符串 避免 .ToString 报错
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.FormatDate(System.String,System.String)">
+            <summary>
+            把日期字符串 转成指定格式
+            </summary>
+            <param name="s"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.ExtMethods.ToNameValue``1(``0)">
+            <summary>
+            把类实例的可读写属性转换为字符串键值对
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.EnumExtension">
+            <summary>
+            枚举扩展
+            </summary>
+        </member>
+        <member name="F:System.EnumExtension._EnumItemCollectionsStock">
+            <summary>
+            把枚举缓存起来，提高系统性能
+            </summary>
+        </member>
+        <member name="M:System.EnumExtension.GetDescription``1(``0)">
+            <summary>
+            获取枚举的 Description 特性值
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:System.EnumExtension.GetEnumItemCollection``1(System.Boolean,System.String)">
+            <summary>
+            把枚举转换为适合作下拉选项的形式
+            </summary>
+            <typeparam name="TEnum"></typeparam>
+            <param name="addDefault"></param>
+            <param name="addDefaultText"></param>
+            <returns></returns>
+        </member>
+        <member name="T:System.EnumListItem">
+            <summary>
+            下拉选项格式的类
+            </summary>
+        </member>
+        <member name="P:System.EnumListItem.ItemValue">
+            <summary>
+            选项值
+            </summary>
+        </member>
+        <member name="P:System.EnumListItem.ItemText">
+            <summary>
+            选项文字
+            </summary>
+        </member>
+        <member name="T:Common.ExtMethods">
+            <summary>
+            不太适合在 System 命名空间下的扩展方法
+            </summary>
+        </member>
+        <member name="M:Common.ExtMethods.ConvertIpToInt(System.String)">
+            <summary>
+            IP（V4）的字符串形式转为数字形式
+            </summary>
+            <param name="IP"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Common.ExtMethods.CpTimeAgoOrLater(System.DateTime,System.DateTime)">
+            <summary>
+            两个时间进行比较 返回友好的中文提示
+            </summary>
+            <param name="s"></param>
+            <param name="dt">要比较的时间 如（DateTime.New）</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
