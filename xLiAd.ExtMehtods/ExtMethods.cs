@@ -126,6 +126,19 @@ namespace System
             }
         }
         /// <summary>
+        /// 字符串转换为日期
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static DateTime? ToDateTime(this string s)
+        {
+            bool b = DateTime.TryParse(s, out var dt);
+            if (b)
+                return dt;
+            else
+                return null;
+        }
+        /// <summary>
         /// 数字转 byte
         /// </summary>
         /// <param name="s"></param>
