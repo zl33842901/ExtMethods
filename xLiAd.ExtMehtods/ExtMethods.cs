@@ -16,6 +16,19 @@ namespace System
     public static class ExtMethods
     {
         /// <summary>
+        /// Determines whether a sequence contains any elements.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements of source.</typeparam>
+        /// <param name="s">The System.Collections.Generic.IEnumerable`1 to check for emptiness.</param>
+        /// <returns>true if the source sequence contains any elements; otherwise, false.</returns>
+        public static bool AnyX<T>(this IEnumerable<T> s)
+        {
+            if (s == null)
+                return false;
+            else
+                return s.Any();
+        }
+        /// <summary>
         /// 拼成逗号分隔的字符串
         /// </summary>
         /// <typeparam name="T"></typeparam>
