@@ -291,6 +291,29 @@ namespace System
             }
             return rst;
         }
+
+        /// <summary>
+        /// 找到迭代器里第一个符合条件的元素的序号
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objs"></param>
+        /// <param name="func"></param>
+        /// <returns>返回序号 没有满足条件的返回 -1</returns>
+        public static int GetIndex<T>(this IEnumerable<T> objs, Func<T,bool> func)
+        {
+            int rst = -1;
+            int i = 0;
+            foreach(var o in objs)
+            {
+                if (func(o))
+                {
+                    rst = i;
+                    break;
+                }
+                i++;
+            }
+            return rst;
+        }
     }
 
     /// <summary>
