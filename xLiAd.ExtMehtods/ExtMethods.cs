@@ -152,6 +152,30 @@ namespace System
                 return null;
         }
         /// <summary>
+        /// 时间转时间戳
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public static long ToTimeStamp(this DateTime time)
+        {
+            long intResult;
+            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+            intResult = (long)(time - startTime).TotalSeconds;
+            return intResult;
+        }
+        /// <summary>
+        /// 时间戳转时间
+        /// </summary>
+        /// <param name="timeStamp"></param>
+        /// <returns></returns>
+        public static DateTime ToTime(string timeStamp)
+        {
+            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+            long lTime = long.Parse(timeStamp + "0000000");
+            TimeSpan toNow = new TimeSpan(lTime);
+            return dtStart.Add(toNow);
+        }
+        /// <summary>
         /// 数字转 byte
         /// </summary>
         /// <param name="s"></param>
