@@ -17,3 +17,5 @@
 /xLiAd.ExtMethods.Standard/.vs
 /xLiAd.ExtMehtods/发布到NUGET.bat
 /xLiAd.ExtMehtods/nupkgsSymb
+/xLiAd.ExtMethods.Test/bin/Debug/netcoreapp3.0
+/xLiAd.ExtMethods.Test/obj

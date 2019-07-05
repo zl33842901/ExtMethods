@@ -154,14 +154,17 @@ namespace System
         /// <summary>
         /// 时间转时间戳
         /// </summary>
-        /// <param name="time"></param>
+        /// <param name="time">要转换的时间</param>
+        /// <param name="thirteen">是否需要13位结果（否则为10位）</param>
         /// <returns></returns>
-        public static long ToTimeStamp(this DateTime time)
+        public static long ToTimeStamp(DateTime time, bool thirteen = false)
         {
-            long intResult;
-            System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
-            intResult = (long)(time - startTime).TotalSeconds;
-            return intResult;
+            var t = TimeZoneInfo.ConvertTime(new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc), TimeZoneInfo.Local);
+            var sp = time - t;
+            if(thirteen)
+                return (long)sp.TotalMilliseconds;
+            else
+                return (long)sp.TotalSeconds;
         }
         /// <summary>
         /// 时间戳转时间
@@ -170,10 +173,12 @@ namespace System
         /// <returns></returns>
         public static DateTime ToTime(this string timeStamp)
         {
-            DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-            long lTime = long.Parse(timeStamp + "0000000");
-            TimeSpan toNow = new TimeSpan(lTime);
-            return dtStart.Add(toNow);
+            if (timeStamp.NullOrEmpty() || (timeStamp.Length != 10 && timeStamp.Length != 13))
+                throw new Exception("format error");
+            long lt = long.Parse(timeStamp.Length == 10 ? (timeStamp + "0000000") : (timeStamp + "0000"));
+            var t = TimeZoneInfo.ConvertTime(new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc), TimeZoneInfo.Local);
+            TimeSpan toNow = new TimeSpan(lt);
+            return t.Add(toNow);
         }
         /// <summary>
         /// 数字转 byte
