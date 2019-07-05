@@ -157,7 +157,7 @@ namespace System
         /// <param name="time">要转换的时间</param>
         /// <param name="thirteen">是否需要13位结果（否则为10位）</param>
         /// <returns></returns>
-        public static long ToTimeStamp(DateTime time, bool thirteen = false)
+        public static long ToTimeStamp(this DateTime time, bool thirteen = false)
         {
             var t = TimeZoneInfo.ConvertTime(new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc), TimeZoneInfo.Local);
             var sp = time - t;
