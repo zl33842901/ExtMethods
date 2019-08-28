@@ -343,6 +343,26 @@ namespace System
             }
             return rst;
         }
+        /// <summary>
+        /// 找到迭代器里最后一个符合条件的元素的序号
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objs"></param>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        public static int GetLastIndex<T>(this IList<T> objs, Func<T, bool> func)
+        {
+            int rst = -1;
+            for(var i = objs.Count -1; i >= 0; i--)
+            {
+                if (func(objs[i]))
+                {
+                    rst = i;
+                    break;
+                }
+            }
+            return rst;
+        }
     }
 
     /// <summary>
