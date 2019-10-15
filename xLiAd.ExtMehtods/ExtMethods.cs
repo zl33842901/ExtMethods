@@ -173,9 +173,9 @@ namespace System
         /// <returns></returns>
         public static DateTime ToTime(this string timeStamp)
         {
-            if (timeStamp.NullOrEmpty() || (timeStamp.Length != 10 && timeStamp.Length != 13))
+            if (timeStamp.NullOrEmpty() || timeStamp.Length > 15)
                 throw new Exception("format error");
-            long lt = long.Parse(timeStamp.Length == 10 ? (timeStamp + "0000000") : (timeStamp + "0000"));
+            long lt = long.Parse(timeStamp.Length <= 10 ? (timeStamp + "0000000") : (timeStamp + "0000"));
             var t = TimeZoneInfo.ConvertTime(new System.DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc), TimeZoneInfo.Local);
             TimeSpan toNow = new TimeSpan(lt);
             return t.Add(toNow);

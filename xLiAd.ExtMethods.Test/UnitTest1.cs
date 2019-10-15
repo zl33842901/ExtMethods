@@ -19,7 +19,7 @@ namespace xLiAd.ExtMethods.Test
         [Fact]
         public void TestToTime()
         {
-            var t1 = "1562308287376";
+            var t1 = "92556455";
             var rst = t1.ToTime();
         }
     }
