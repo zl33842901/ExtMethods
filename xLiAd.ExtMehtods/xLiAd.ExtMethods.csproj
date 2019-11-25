@@ -7,7 +7,7 @@
     <Copyright>Copyright © zhanglei 2019</Copyright>
     <PackageProjectUrl>https://github.com/zl33842901/ExtMethods</PackageProjectUrl>
     <Description>几个常用的扩展方法</Description>
-    <Version>1.1.8.9</Version>
+    <Version>1.1.9.0</Version>
     <LangVersion>7.3</LangVersion>
     <AssemblyVersion>1.1.8.3</AssemblyVersion>
   </PropertyGroup>

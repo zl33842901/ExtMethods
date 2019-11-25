@@ -95,6 +95,22 @@ namespace System
                 return defValue;
         }
         /// <summary>
+        /// 字符串转整数 （失败时返回默认值）
+        /// </summary>
+        /// <param name="s">源字符串</param>
+        /// <param name="defValue">转换失败时的默认值</param>
+        /// <returns></returns>
+        public static int? ToIntNull(this string s, int? defValue = null)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+                return defValue;
+            bool b = int.TryParse(s, out int v);
+            if (b)
+                return v;
+            else
+                return defValue;
+        }
+        /// <summary>
         /// 字符串转数字 失败时返回0
         /// </summary>
         /// <param name="s"></param>
