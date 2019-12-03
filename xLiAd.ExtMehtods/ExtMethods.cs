@@ -120,6 +120,22 @@ namespace System
             return s.ToInt(0);
         }
         /// <summary>
+        /// 字符串转Float
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="defValue"></param>
+        /// <returns></returns>
+        public static float? ToFloat(this string s, float? defValue = null)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+                return defValue;
+            bool b = float.TryParse(s, out var v);
+            if (b)
+                return v;
+            else
+                return defValue;
+        }
+        /// <summary>
         /// 限制数字值大小
         /// </summary>
         /// <param name="i">原数字</param>
