@@ -395,6 +395,18 @@ namespace System
             }
             return rst;
         }
+        /// <summary>
+        /// 递归获取最内层异常
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        public static Exception GetInnerException(this Exception ex)
+        {
+            if (ex.InnerException != null)
+                return GetInnerException(ex.InnerException);
+            else
+                return ex;
+        }
     }
 
     /// <summary>
