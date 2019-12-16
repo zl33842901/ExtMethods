@@ -305,6 +305,21 @@ namespace System
             }
         }
         /// <summary>
+        /// 字符串转换为 decimal 失败时返回 null
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static decimal? ToDecimalNull(this string s)
+        {
+            if (s.NullOrEmpty())
+                return null;
+            bool result = decimal.TryParse(s, out decimal value);
+            if (result)
+                return value;
+            else
+                return null;
+        }
+        /// <summary>
         /// object 转为字符串 避免 .ToString 报错
         /// </summary>
         /// <param name="s"></param>
