@@ -391,6 +391,23 @@ namespace System
             return rst;
         }
         /// <summary>
+        /// 找到迭代器里符合条件的元素的序号
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="objs"></param>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        public static IEnumerable<int> GetIndexes<T>(this IEnumerable<T> objs, Func<T, bool> func)
+        {
+            int i = 0;
+            foreach (var o in objs)
+            {
+                if (func(o))
+                    yield return i;
+                i++;
+            }
+        }
+        /// <summary>
         /// 找到迭代器里最后一个符合条件的元素的序号
         /// </summary>
         /// <typeparam name="T"></typeparam>
