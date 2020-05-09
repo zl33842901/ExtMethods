@@ -29,6 +29,19 @@ namespace System
                 return s.Any();
         }
         /// <summary>
+        /// Computes the average of a sequence of System.Decimal values.
+        /// </summary>
+        /// <param name="s">A sequence of System.Decimal values to calculate the average of.</param>
+        /// <param name="def">当s为空时返回的默认值.</param>
+        /// <returns>The average of the sequence of values.</returns>
+        public static decimal AverageX(this IEnumerable<decimal> s, decimal def = 0)
+        {
+            if (s.AnyX())
+                return s.Average();
+            else
+                return def;
+        }
+        /// <summary>
         /// 拼成逗号分隔的字符串
         /// </summary>
         /// <typeparam name="T"></typeparam>
